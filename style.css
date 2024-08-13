@@ -156,3 +156,12 @@ table {
     width: 100%;
 }
 /* table css end */
+
+.toDetailPage {
+    color: black;
+    text-decoration: none;
+}
+
+.toDetailPage:hover {
+    text-decoration: underline;
+}

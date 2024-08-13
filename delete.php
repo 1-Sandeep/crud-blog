@@ -1,16 +1,12 @@
 <?php
-header('Content-Type: application/json');
-
-// Check the ID
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']); // Type conversion
 
-    // DB connection
     $conn = mysqli_connect("localhost", "root", "", "assignment_blog");
 
     // Check connection
     if (!$conn) {
-        echo json_encode(['status' => 'error', 'message' => 'Connection failed: ' . mysqli_connect_error()]);
+        header('Location: index.php?message=' . urlencode('Connection failed: ' . mysqli_connect_error()));
         exit;
     }
 
@@ -18,13 +14,17 @@ if (isset($_GET['id'])) {
     $query = "DELETE FROM posts WHERE id = $id";
 
     if (mysqli_query($conn, $query)) {
-        echo json_encode(['status' => 'success', 'message' => 'Post has been deleted.']);
+        mysqli_close($conn);
+
+        header('Location: index.php');
+        exit;
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'Error deleting post: ' . mysqli_error($conn)]);
+        header('Location: index.php?message=');
+        exit;
     }
 
-    // Close connection
     mysqli_close($conn);
 } else {
-    echo json_encode(['status' => 'error', 'message' => 'ID not provided.']);
+    header('Location: index.php?message=');
+    exit;
 }

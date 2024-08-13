@@ -21,7 +21,7 @@ $records = mysqli_query($conn, $query);
 
 while ($record = mysqli_fetch_assoc($records)) {
     $table .= '<tr>';
-    $table .= '<td>' . htmlspecialchars($record['title']) . '</td>';
+    $table .= '<td><a class="toDetailPage" href="detail.php?id=' . $record['id'] . '">' . htmlspecialchars($record['title']) . '</a></td>';
     $table .= '<td>' . htmlspecialchars($record['summary']) . '</td>';
     $table .= '<td>' . htmlspecialchars($record['date']) . '</td>';
     $table .= '<td>
